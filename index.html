@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <script src="js.js"></script>
+</head>
+<body>
+    <form method="POST" 
+            onsubmit="postInsert(event)"
+            action="ws.php?page=insert">
+        <input type="submit" value="insert">
+    </form>
+    <form method="POST" 
+            onsubmit="postUpdate(event)"
+            action="ws.php?page=update">
+        <input type="submit" value="update">
+    </form>
+    <form method="GET" 
+            onsubmit="getDelete(event)" 
+            action="ws.php?page=delete">
+        <input type="submit" value="delete">
+    </form>
+    <form method="GET" 
+            onsubmit="getSelect(event)" 
+            action="ws.php?page=select">
+        <input type="submit" value="select">
+    </form>
+    <form method="POST" 
+            onsubmit="getSelectAll(event)" 
+            action="ws.php?page=selectall">
+        <input type="submit" value="selectall">
+    </form>
+    <div id="output">
+        output goes here!
+    </div>
+</body>
+</html>
