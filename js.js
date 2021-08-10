@@ -48,7 +48,8 @@ function postUpdate (evt) {
 function getDelete (evt) {
     evt.preventDefault();
     var delid = evt.target[0].value;
-    fetch(evt.target.action)
+    var url = evt.target.action + '&id=' + delid;
+    fetch(url)
     .then (
         function(headers) {
             if (headers.status === 202) {
