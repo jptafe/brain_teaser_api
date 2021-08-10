@@ -1,6 +1,10 @@
 function postInsert (evt) {
     evt.preventDefault();
-    fetch(evt.target.action)
+    fetch(evt.target.action, 
+        {
+            method: 'POST'
+        }
+    ) // here we need to POST
     .then (
         function(headers) {
             if (headers.status === 201) {
@@ -12,10 +16,14 @@ function postInsert (evt) {
         }
     );
 }
-// :)
+
 function postUpdate (evt) {
     evt.preventDefault();
-    fetch(evt.target.action)
+    fetch(evt.target.action, 
+        {
+            method: 'POST'
+        }
+    ) // here we need to POST
     .then (
         function(headers) {
             if (headers.status === 202) {
@@ -51,8 +59,8 @@ function getSelect (evt) {
             if (headers.status === 200) {
                 console.log('success');
             }
-            headers.text().then(function(body) {
-                document.getElementById('output').innerHTML = body;
+            headers.json().then(function(body) {
+                document.getElementById('output').innerHTML = JSON.stringify(body.msg);
             })
         }
     );
@@ -66,8 +74,8 @@ function getSelectAll (evt) {
             if (headers.status === 200) {
                 console.log('success');
             }
-            headers.text().then(function(body) {
-                document.getElementById('output').innerHTML = body;
+            headers.json().then(function(body) {
+                document.getElementById('output').innerHTML = JSON.stringify(body).msg;
             })
         }
     );
