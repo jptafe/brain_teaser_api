@@ -1,10 +1,14 @@
 function postInsert (evt) {
     evt.preventDefault();
+    var postFormData = new FormData();
+    postFormData.append(evt.target[0].name, evt.target[0].value);
+    postFormData.append(evt.target[1].name, evt.target[1].value);
     fetch(evt.target.action, 
         {
-            method: 'POST'
+            method: 'POST',
+            body: postFormData
         }
-    ) // here we need to POST
+    ) 
     .then (
         function(headers) {
             if (headers.status === 201) {
@@ -19,11 +23,16 @@ function postInsert (evt) {
 
 function postUpdate (evt) {
     evt.preventDefault();
+    var postFormData = new FormData();
+    postFormData.append(evt.target[0].name, evt.target[0].value);
+    postFormData.append(evt.target[1].name, evt.target[1].value);
+    postFormData.append(evt.target[2].name, evt.target[2].value);
     fetch(evt.target.action, 
         {
-            method: 'POST'
+            method: 'POST',
+            body: postFormData
         }
-    ) // here we need to POST
+    ) 
     .then (
         function(headers) {
             if (headers.status === 202) {
@@ -38,6 +47,7 @@ function postUpdate (evt) {
 
 function getDelete (evt) {
     evt.preventDefault();
+    var delid = evt.target[0].value;
     fetch(evt.target.action)
     .then (
         function(headers) {
@@ -53,6 +63,7 @@ function getDelete (evt) {
 
 function getSelect (evt) {
     evt.preventDefault();
+    var selid = evt.target[0].value;
     fetch(evt.target.action)
     .then (
         function(headers) {
