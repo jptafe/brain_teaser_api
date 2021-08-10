@@ -1,7 +1,7 @@
 <?php
 
     // we need some setup lines here:
-    $dbURI = 'mysql:host=127.0.0.1;port=3306;dbname=todoapp';
+    $dbURI = 'mysql:host=127.0.0.1;port=3306;dbname=todoapp';   
     $dbconn = new PDO($dbURI, 'databaseuser', 'somesecurepassword');
 
     switch($_GET['page']) {
@@ -30,10 +30,10 @@
             }               
             break;
         case 'select':
-            // check to see if row id is in the request send id to db functiohn()
-            if (db_select_one() == true) {
+            $res = db_select_one($_GET['id']);
+            if (is_array($res)) {
                 http_response_code(200);
-                echo json_encode(Array('msg'=>'roger select red leader'));
+                echo json_encode($res);
             } else {
                 http_response_code(400);
             }               
@@ -53,33 +53,64 @@
             break;
     }
 
-    function db_insert($u, $p) {
+    function db_insert ($u, $p) {
+        global $dbconn;
         $sql = "INSERT INTO todouser (user_name, `user_email`, `user_password`, `user_picture`, `user_role`) 
                 VALUES (:un, 'email@email.com', :pass, 'defaultpic.jpg', 'user');";
+        $stmt = $dbconn->prepare($sql);
+        $stmt->bindParam(':un', $u, PDO::PARAM_STR);
+        $stmt->bindParam(':pass', $p, PDO::PARAM_STR);
+        $stmt->execute();
+        if (true) { // better test would be?
+            return true;
+        }
         return false;
     }
 
-    function db_update($id, $u, $p) {
+    function db_update ($id, $u, $p) {
+        global $dbconn;
         $sql = "UPDATE todouser SET user_name = :u, user_password = :pass WHERE id = :id";
+        $stmt = $dbconn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':u', $u, PDO::PARAM_STR);
+        $stmt->bindParam(':pass', $p, PDO::PARAM_STR);
+        $stmt->execute();
+        if (true) { // better test would be?
+            return true;
+        }
         return false;
     }
 
-    function db_delete($id) {
+    function db_delete ($id) {
+        global $dbconn;
         $sql = "DELETE FROM todouser WHERE id = :id";
+        $stmt = $dbconn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        if (true) { // better test would be?
+            return true;  
+        }
         return false;
     }
 
-    function db_select_one($id) {
+    function db_select_one ($id) {
+        global $dbconn;
         $sql = "SELECT * FROM todouser WHERE id = :id";
+        $stmt = $dbconn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) { 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         return false;
     }
 
-    function db_select_all() {
+    function db_select_all () {
         global $dbconn;
         $sql = "SELECT * FROM todouser";
         $stmt = $dbconn->prepare($sql);
         $stmt->execute();
-        if($stmt->rowCount() > 0) {
+        if ($stmt->rowCount() > 0) {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         return false;

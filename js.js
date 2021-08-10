@@ -64,7 +64,8 @@ function getDelete (evt) {
 function getSelect (evt) {
     evt.preventDefault();
     var selid = evt.target[0].value;
-    fetch(evt.target.action)
+    var url = evt.target.action + '&id=' + selid;
+    fetch(url)
     .then (
         function(headers) {
             if (headers.status === 200) {
