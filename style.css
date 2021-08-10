@@ -1,0 +1,11 @@
+form {
+    background-color: rgb(216, 250, 216);
+    background-color: rgb(235, 120, 218);
+    padding: .4em;
+    margin: .4em;
+}
+input {
+    display: block;
+    width: 18em;
+    margin-bottom: .4em;
+}
