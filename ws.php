@@ -1,4 +1,22 @@
 <?php
+    
+    require_once ('session.php');
+
+    if(!isset($_SESSION['sessobj'])) {
+        $_SESSION['sessobj'] = new sessionManager;
+        http_response_code(429);
+        exit();  // exit early if user not allowed
+    }
+
+    if(is_rate_limited()) {
+        http_response_code(429);
+        exit();
+    }
+
+    if (!is_corret_origin () ) {
+        http_response_code(401);
+        exit();
+    }
 
     // we need some setup lines here:
     $dbURI = 'mysql:host=127.0.0.1;port=3306;dbname=todoapp';   
