@@ -5,7 +5,7 @@
         <meta name="viewport" 
             content="width=device-width, initial-scale=1.0">
         <title>API</title>
-        <script src="js.js"></script>
+        <script src="js.js" defer></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -48,6 +48,14 @@
         </form>
         <div id="output">
             output goes here!
+        </div>
+        <div id="alertbox" onclick="hideAlert()" hidden>
+            <div id="alertclose">
+                X
+            </div>
+            <div id="alertmsg">
+                ERROR GOES HERE
+            </div>
         </div>
     </body>
 </html>

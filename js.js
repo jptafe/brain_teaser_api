@@ -1,3 +1,4 @@
+
 function postInsert (evt) {
     evt.preventDefault();
     var postFormData = new FormData();
@@ -12,7 +13,7 @@ function postInsert (evt) {
     .then (
         function(headers) {
             if (headers.status === 201) {
-                console.log('success');
+                showAlert('meh', 'You did GOOD!!!');
             }
             headers.text().then(function(body) {
                 document.getElementById('output').innerHTML = body;
@@ -36,6 +37,7 @@ function postUpdate (evt) {
     .then (
         function(headers) {
             if (headers.status === 202) {
+                showAlert('meh', 'You did GOOD!!!');
                 console.log('success');
             }
             headers.text().then(function(body) {
@@ -53,6 +55,7 @@ function getDelete (evt) {
     .then (
         function(headers) {
             if (headers.status === 202) {
+                showAlert('meh', 'You did GOOD!!!');
                 console.log('success');
             }
             headers.text().then(function(body) {
@@ -70,7 +73,7 @@ function getSelect (evt) {
     .then (
         function(headers) {
             if (headers.status === 200) {
-                console.log('success');
+                showAlert('meh', 'You did GOOD!!!');
             }
             headers.json().then(function(body) {
                 document.getElementById('output').innerHTML = JSON.stringify(body.msg);
@@ -85,11 +88,29 @@ function getSelectAll (evt) {
     .then (
         function(headers) {
             if (headers.status === 200) {
-                console.log('success');
+                showAlert('meh', 'You did GOOD!!!');
             }
             headers.json().then(function(body) {
                 document.getElementById('output').innerHTML = JSON.stringify(body).msg;
             })
         }
     );
+}
+
+function showAlert(msgtype, msg) {
+    document.getElementById('alertbox').removeAttribute('hidden');
+    document.getElementById('alertmsg').innerHTML = msg;
+    var timeOut = window.setTimeout(function() {hideAlert ()}, 10000);
+    if (msgtype == 'good') {
+        document.getElementById('alertbox').style.backgroundColor = 'rgb(216, 250, 216)';
+    }
+    if (msgtype == 'bad') {
+        document.getElementById('alertbox').style.backgroundColor = 'rgb(250, 216, 245)';
+    }
+    if (msgtype == 'meh') {
+        document.getElementById('alertbox').style.backgroundColor = 'rgb(250, 238, 216)';
+    }
+}
+function hideAlert (msg) {
+    document.getElementById('alertbox').setAttribute('hidden', 'hidden');
 }

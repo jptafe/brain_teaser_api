@@ -1,6 +1,5 @@
 form {
-    background-color: rgb(216, 250, 216);
-    background: rgb(246, 216, 242);
+    background: rgb(212, 212, 212);
     padding: .4em;
     margin: .4em;
 }
@@ -11,4 +10,19 @@ input {
 }
 input[type="submit"] {
     width: 18.6em;
+}
+#alertbox {
+    position: absolute;
+    height: 3em;
+    width: 90%;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    padding: .8em;
+}
+#alertclose {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: grabbing;
 }
